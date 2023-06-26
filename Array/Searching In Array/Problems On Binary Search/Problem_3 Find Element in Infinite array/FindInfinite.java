@@ -1,15 +1,9 @@
 
 
-public class BinarySearch{
+public class FindInfinite{
 
-
-    // Method to perform binary search on a sorted array
-    static int searchBS(int[] arr, int target){
-        int n = arr.length;   // Length of the array
-        int start = 0;   // Start index of the search range
-        int end = n - 1;    // End index of the search range
+    static int searchBS(int[] arr, int target, int start, int end){
         
-
         while(start <= end){
             int mid = start + (end - start) / 2;  // Calculate the middle index
 
@@ -31,8 +25,21 @@ public class BinarySearch{
         return -1;  // If the value is not found, return -1
     }
 
+    static int findElement(int[] arr, int target){
+        int start = 0;
+        int end = 1;
+
+        while(arr[end] < target){
+            int newStart = end + 1;
+            end = start + (end - start + 1)*2;
+            start = newStart;
+        }
+
+        return searchBS(arr, target, start, end);
+    }
+
     public static void main(String[] args){
-        int[] arr = {};
-        System.out.println(searchBS(arr,2));
+        int[] arr = {2};
+        System.out.println(findElement(arr, 11)); 
     }
 }

@@ -1,17 +1,42 @@
 
 
-public class OrderAgnosticBS{
+public class FindInMountainArray{
 
+    // Method to find the index of a peak element in the array
+    static int findPeak(int[] arr){
+        int n = arr.length;
+        int start = 0;
+        int end = n - 1;
 
-    // Method to perform binary search on a sorted array
-    static int search(int[] arr, int target){
+        while(start < end){
+            int mid = start + (end - start) / 2;
+
+            if(arr[mid] < arr[mid + 1]){
+                // If the element at mid is less than its adjacent element on the right,
+                // the peak element must be on the right side of mid
+                start = mid + 1;
+            }
+            else{
+                // Otherwise, the peak element must be on the left side of mid or can be the mid element itself
+                // Since we are looking for any peak element, updating end to mid is valid.
+                end = mid;
+            }
+        }
+
+        // At this point, start and end will be equal, indicating the index of the peak element
+        return start;
+    }
+
+    static int findElement(int[] arr, int target){
         int n = arr.length;   // Length of the array
         int start = 0;   // Start index of the search range
         int end = n - 1;    // End index of the search range
+        int peakInd = findPeak(arr);
         
 
         // When the array is in assending order
-        if(arr[start] < arr[end]){
+        if(target < arr[peakInd]){
+            end = peakInd;
             while(start <= end){
                 int mid = start + (end - start) / 2;  // Calculate the middle index
 
@@ -33,7 +58,8 @@ public class OrderAgnosticBS{
         }
 
         // When the array is in decending order
-        if(arr[start] > arr[end]){
+        else{
+            start = peakInd;
              while(start <= end){
                 int mid = start + (end - start) / 2;  // Calculate the middle index
 
@@ -58,9 +84,7 @@ public class OrderAgnosticBS{
     }
 
     public static void main(String[] args){
-        int[] arr = {1, 2, 3, 4, 5, 6};
-        System.out.println(search(arr,2));
-        int[] arr2 = {5, 4, 3, 2, 1};
-        System.out.println(search(arr2,2));
+        int[] arr = {1,2,3,4,5,3,1};
+        System.out.println(findElement(arr, 3));
     }
 }

@@ -46,8 +46,8 @@ public class CeilingAndFloor{
         int end = n - 1;    // End index of the search range
         
 
-        if(target > arr[n - 1]){ // if the target is greater than the last element of the array, return -1 
-            return -1;
+        if(target > arr[n - 1]){ // if the target is greater than the last element of the array, return ns-1 
+            return n - 1;
         }
 
         while(start <= end){
@@ -77,7 +77,7 @@ public class CeilingAndFloor{
     public static void main(String[] args){
         int[] arr = {2, 3, 5, 6};
         System.out.println(searchCeiling(arr,1));
-        System.out.println(searchFloor(arr,1));
+        System.out.println(searchFloor(arr,10));
         
     }
 }

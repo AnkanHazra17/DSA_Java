@@ -17,7 +17,7 @@ public class SecondLargestElement{
         return -1;    // Return -1 if no second largest element is found
     }
 
-    public static void main(String[] args){
+    public static <String> void main(String[] args){
         int[] arr = {6, 7, 4, 5, 3, 5, 9, 11, 2, 3, 4};
         int n = arr.length;
         System.out.println(secondLargest(arr,n)); 

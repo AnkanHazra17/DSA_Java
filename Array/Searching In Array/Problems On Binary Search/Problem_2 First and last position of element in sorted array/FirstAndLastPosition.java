@@ -32,63 +32,70 @@ public class FirstAndLastPosition{
         return -1;  // If the value is not found, return -1
     }
 
+
+    // Find the index of the first occurrence of the target value in the array
     static int firstOccurence(int[] arr, int target){
         int n = arr.length;
 
-        if(n < 1){
+        if(n < 1){    // Check for an empty array
             return -1;
         }
 
-        if(n == 1){
+        if(n == 1){    // Check for an array with a single element
             if(arr[0] == target){
                 return 0;
             }
             return -1;
         }
 
-        if(arr[0] == target){
+        if(arr[0] == target){  // Check if the target is at the first index
             return 0;
         }
 
-        int targetInd = findTarget(arr,target);
+        int targetInd = findTarget(arr,target);   // Find the index of the target value
 
-        if(targetInd == -1){
+        if(targetInd == -1){     // If the target value is not present in the array, return -1
             return -1;
         }
 
+        // Iterate backwards from the target index to find the first occurrence
         for(int fistInd = targetInd; fistInd >= 0; fistInd--){
             if(arr[fistInd] != target){
                 return fistInd + 1;
             }
         }
 
-        return -1;
+        return -1;  // If the target value is not found, return -1
     }
 
+
+    // Find the index of the last occurrence of the target value in the array
     static int secondOccurence(int[] arr, int target){
         int n = arr.length;
 
-        if(n < 1){
+        if(n < 1){     // Check for an empty array
             return -1;
         }
 
-        if(n == 1){
+        if(n == 1){    // Check for an array with a single element
             if(arr[0] == target){
                 return 0;
             }
             return -1;
         }
 
-        if(arr[n - 1] == target){
+        if(arr[n - 1] == target){  // Check if the target is at the last index
             return n - 1;
         }
 
-        int targetInd = findTarget(arr,target);
+        int targetInd = findTarget(arr,target);  // Find the index of the target value
 
-        if(targetInd == -1){
-            return -1;
+        if(targetInd == -1){     // If the target value is not present in the array, return -1
+            return -1;   
         }
 
+
+        // Iterate forwords from the target index to find the first occurrence
         for(int secInd = targetInd; secInd <= n - 1; secInd++){
             if(arr[secInd] != target){
                 return secInd - 1;
