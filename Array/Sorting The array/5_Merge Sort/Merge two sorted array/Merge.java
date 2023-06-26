@@ -4,41 +4,46 @@ import java.util.Arrays;
 
 public class Merge{
 
-    static int[] arrayMerge(int[] arr1, int[] arr2){
-        int n = arr1.length;
-        int m = arr2.length;
-        int p = (n + m);
+    // Method to merge two sorted arrays into a single sorted array
+    static int[] arrayMerge(int[] first, int[] second){
 
-        int[] arr3 = new int[p];
-        int i = 0;
-        int j = 0;
-        int k = 0;
+        // Create a new array to store the merged result
+        int[] ans = new int[first.length + second.length];
+        int i = 0;  // Index for the first array
+        int j = 0;  // Index for the second array
+        int k = 0;  // Index for the marged array
 
-        while(k < p){
-            if(i > n - 1){
-                arr3[k] = arr2[j];
-                j++;
-                k++;
-            }
+        // Compare elements from both arrays and merge them in sorted order
+        while(i < first.length && j< second.length){
 
-            if(j > m - 1){
-                arr3[k] = arr1[i];
-                i++;
-                k++;
-            }
-
-            if(arr1[i] <= arr2[j]){
-                arr3[k] = arr1[i];
-                i++;
-                k++;
+            // Store the smaller element from the first array in the merged array
+            if(first[i] < second[j]){
+                ans[k] = first[i];
+                i++;  // Move to the next element in the first array
             }
             else{
-                arr3[k] = arr2[j];
-                j++;
-                k++;
+                // Store the smaller element from the second array in the merged array
+                ans[k] = second[j];
+                j++;  // Move to the next element in the second array
             }
+            k++;
         }
-        return arr3;
+
+        // Copy remaining elements from the first array, if any
+        while(i < first.length){
+            ans[k] = first[i];
+            i++;
+            k++;
+        }
+
+        // Copy remaining elements from the second array, if any
+        while(j < second.length){
+            ans[k] = second[j];
+            j++;
+            k++;
+        }
+
+        return ans;  // Return the merged array
     }
 
     public static void main(String[] args){
