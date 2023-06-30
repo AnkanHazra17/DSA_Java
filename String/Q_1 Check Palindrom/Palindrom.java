@@ -1,3 +1,6 @@
+
+// Q: Check if a string is palindrom or not
+
 import java.util.Scanner;
 
 public class Palindrom{
