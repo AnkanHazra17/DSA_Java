@@ -46,7 +46,7 @@ public class SortedCheck {
     }
 
     public static void main(String[] args) {
-        int[] nums = {5,5,6,6,6,9,1,2};
+        int[] nums = {2,7,4,1,2,6,2};
         // int n = arr.length;
         System.out.println(arraySortedOrNot(nums));
     }
