@@ -1,4 +1,5 @@
 
+// Question: Given a 2D array, the task is to calculate the largest sum column wise
 
 public class LargeColSum{
 
