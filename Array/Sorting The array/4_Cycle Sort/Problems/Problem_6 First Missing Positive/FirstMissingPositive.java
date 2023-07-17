@@ -40,7 +40,7 @@ public class FirstMissingPositive{
     }
 
     public static void main(String[] args){
-        int[] arr = {7,8,9,11,12};
+        int[] arr = {0,-10,1,3,-20};
         System.out.println(find(arr));
     }
 }
