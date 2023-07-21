@@ -338,14 +338,82 @@ public class LinkedList{
         System.out.println("null"); 
     }
 
+    // Check If a liked list is palindrome or not
+
+    // Helper method to find the middle node of the linked list
+    public Node findMidNode(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        // Traverse the linked list using slow and fast pointers
+        // The slow pointer moves one step at a time, while the fast pointer moves two steps at a time
+        // When the fast pointer reaches the end, the slow pointer will be at the middle node
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Return the middle node
+        return slow;
+    }
+
+    // Method to check if the linked list is a palindrome
+    public boolean checkPalindrome(){
+
+        // Step 0: Base case - an empty list or a list with only one node is always a palindrome
+        if(head == null || head.next == null){
+            return true;
+        }
+
+        // Step 1: Find the middle Node of the linked list using the findMidNode method
+        Node midNode = findMidNode(head);
+
+        // Step 2: Reverse the second half of the linked list (starting from the middle node)
+
+        // Initialize three pointers: prev (to keep track of the previous node), curr (to keep track of the current node)
+        // and aft (to keep track of the next node in the original list before modifying the 'next' pointer).
+        Node prev = null;
+        Node curr = midNode;
+        Node aft;
+
+        // Reverse the second half of the linked list
+        while(curr != null){
+            aft = curr.next;  // Store the next node in 'aft'
+            curr.next = prev;  // Reverse the 'next' pointer to point to the previous node
+            prev = curr;    // Move 'prev' to the current node
+            curr = aft;   // Move 'curr' to the next node in the original list
+        }
+
+        // 'prev' now points to the head of the reversed second half of the linked list.
+        // 'head' still points to the head of the original list.
+        Node right = prev;
+        Node left = head;
+
+        // Step 3: Compare the elements of the first half (left) and the reversed second half (right) of the linked list
+
+        // Traverse both halves simultaneously and check if the elements are equal.
+        // If at any point the elements are not equal, the list is not a palindrome.
+        while(right != null){
+            if(left.data != right.data){
+                return false;  // Not a palindrome
+            }
+
+            left = left.next;
+            right = right.next;
+        }
+
+        // If the loop completes without finding any mismatch, the list is a palindrome.
+        return true;
+    }
+
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
 
         //ll.printList();
-        ll.addFirst(2);
-        ll.addFirst(1);
-        ll.addLast(3);
-        ll.addLast(4);
+        // ll.addFirst(2);
+        // ll.addFirst(1);
+        // ll.addLast(3);
+        // ll.addLast(4);
         // ll.printList();
 
         // ll.addInMiddle(2, 5);
@@ -385,8 +453,16 @@ public class LinkedList{
         // System.out.println(head.data);
         // System.out.println(tail.data);
 
-        System.out.println(ll.removeNthFromLast(1));
+        // System.out.println(ll.removeNthFromLast(1));
+        // ll.printList();
+
+        ll.addLast(1);
+        // ll.addLast(2);
+        // ll.addLast(2);
+        // ll.addLast(1);
+
         ll.printList();
+        System.out.println(ll.checkPalindrome());
 
     }
 }
