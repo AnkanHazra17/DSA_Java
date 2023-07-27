@@ -31,7 +31,7 @@ public class ZigZagLL{
 
         // when linked list is non empty
         tail.next = newNode;  // Set the current tail's next reference to the new node
-        tail = newNode;   // Update the tail to the new node
+        tail = newNode;       // Update the tail to the new node
     }
 
     // Method to print the elements of the linked list
@@ -45,54 +45,53 @@ public class ZigZagLL{
         System.out.println("null"); 
     }
 
-    // Method to find Mid 
-    static Node findMid(){
-        Node slow = head;
-        Node fast = head;
 
+    static void zigZag(){
+        // Step-1: Find Mid
+        Node slow = head;       // Initialize a pointer 'slow' to the head of the linked list.
+        Node fast = head.next;  // Initialize a pointer 'fast' to the second node of the linked list.
+
+        // Traverse the linked list with 'slow' moving one step and 'fast' moving two steps at a time,
+        // until 'fast' reaches the end or the second-to-last node.
         while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        return slow;
-    }
-
-    static Node reverseLL(Node lefthead){
-        Node prev = null;
-        Node curr = lefthead;
-        Node aft;
-
-        while(curr != null && curr.next != null){
-            aft = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = aft;
-        }
-
-        return prev;
-    }
-
-    static void zigZag(){
-        // Step-1: Find Mid
-        Node mid = findMid();
+        Node mid = slow;    // Now, 'mid' is pointing to the middle node of the linked list.
 
         // Step-2: Revers left half
-        Node prev = reverseLL(mid);
+        Node curr = mid.next;     // Start 'curr' from the node after 'mid' (second half of the list).
+        mid.next = null;          // Break the link between the first and second halves.
+        Node prev = null;         // Initialize a pointer 'prev' to null, which will be used in the reversal.
+        Node aft;
+
+        // Reverse the second half of the linked list.
+        while(curr != null){
+            aft = curr.next;      // Save the next node to be processed after 'curr'.
+            curr.next = prev;     // Reverse the link of 'curr' to point to the previous node ('prev').
+            prev = curr;          // Move 'prev' one step ahead to the current node 'curr'.
+            curr = aft;           // Move 'curr' one step ahead to the next node to be processed.
+        }
+
+
+        // Now, 'prev' is pointing to the last node of the original linked list, which is the reversed first half.
 
         // Step-3: Merge in zigzag order or Alternate order
-        Node left = head;
-        Node right = prev;
+        Node left = head;      // Initialize a pointer 'left' to the head of the original linked list (first half).
+        Node right = prev;     // Initialize a pointer 'right' to the last node of the reversed first half.
 
         Node nextL;
         Node nextR;
 
+        // Merge the nodes in zigzag or alternate order.
         while(left != null && right != null){
-            nextL = left.next;
-            left.next = right;
-            nextR = right.next;
-            right.next = nextL;
+            nextL = left.next;         // Save the next node of 'left' to be processed after merging.
+            left.next = right;         // Make 'left' point to the current node of 'right'.
+            nextR = right.next;        // Save the next node of 'right' to be processed after merging.
+            right.next = nextL;        // Make 'right' point to the current node of 'left'.
 
+            // Move 'left' and 'right' to their respective next nodes for the next iteration.
             left = nextL;
             right = nextR;
         }
