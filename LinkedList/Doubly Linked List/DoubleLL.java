@@ -89,6 +89,24 @@ public class DoubleLL{
         return val;
     }
 
+    // Meyhod to reverse a doubly Linked List
+    public void reverse(){
+        Node curr = head;
+        Node bef = null;
+        Node aft;
+
+        while(curr != null){
+            aft = curr.next;
+            curr.next = bef;
+            curr.prev = aft;
+            bef = curr;
+            curr = aft;
+        }
+
+        head = bef;
+
+    }
+
     // Method to print Doubly Linked List
     public void printLL(){
         Node temp = head;
@@ -111,7 +129,10 @@ public class DoubleLL{
         // dll.removeFirst();
         // dll.printLL();
 
-        dll.removeLast();
+        // dll.removeLast();
+        // dll.printLL();
+
+        dll.reverse();
         dll.printLL();
     }
 }
