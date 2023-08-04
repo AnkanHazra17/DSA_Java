@@ -19,7 +19,7 @@ public class Solution{
                 ele = nums[i];
                 cnt = 1;
             }
-            else if(ele == nums[i]){ // If the count is 0, update the potential majority element and count
+            else if(ele == nums[i]){ 
                 cnt++;
             }
             else{    // If the current element is different, decrement the count
