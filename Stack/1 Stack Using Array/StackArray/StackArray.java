@@ -17,14 +17,14 @@ class ArrStack{
 
     // Default constructor, initializes the stack with a default capacity of 10
     public ArrStack(){
-        data = new int[10];
-        top = -1;   // Set top to -1 to indicate an empty stack
+        this.data = new int[10];
+        this.top = -1;
     }
 
     // Constructor to create a stack with a specified capacity
     public ArrStack(int capacity){
-        data = new int[capacity];
-        top = -1;    // Set top to -1 to indicate an empty stack
+        this.data = new int[capacity];
+        this.top = -1;    // Set top to -1 to indicate an empty stack
     }
 
     // Method to check if the stack is empty

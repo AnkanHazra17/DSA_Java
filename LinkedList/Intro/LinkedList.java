@@ -54,6 +54,7 @@ public class LinkedList{
         tail = newNode;   // Update the tail to the new node
     }
 
+
     // Method to add a node with given data at the specified index in the linked list
     public void addInMiddle(int ind, int data){
 
