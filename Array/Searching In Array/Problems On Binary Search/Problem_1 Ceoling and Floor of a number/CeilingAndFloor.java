@@ -75,9 +75,8 @@ public class CeilingAndFloor{
     }
 
     public static void main(String[] args){
-        int[] arr = {2, 3, 5, 6};
-        System.out.println(searchCeiling(arr,1));
-        System.out.println(searchFloor(arr,10));
-        
+        int[] arr = {1,2,2,3};
+        System.out.println(searchCeiling(arr,0));
+        // System.out.println(searchFloor(arr,10));
     }
 }
