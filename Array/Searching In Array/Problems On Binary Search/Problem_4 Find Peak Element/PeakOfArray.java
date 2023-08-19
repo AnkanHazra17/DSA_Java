@@ -6,31 +6,48 @@ public class PeakOfArray{
 
     // Method to find the index of a peak element in the array
     static int findPeak(int[] arr){
-        int n = arr.length;
-        int start = 0;
-        int end = n - 1;
+        int n = arr.length;    // Get the length of the input array
 
-        while(start < end){
-            int mid = start + (end - start) / 2;
+        if(n == 1){     // Check if the array has only one element
+            return 0;   // Return 0 as the only element is considered a peak
+        }
 
-            if(arr[mid] < arr[mid + 1]){
-                // If the element at mid is less than its adjacent element on the right,
-                // the peak element must be on the right side of mid
-                start = mid + 1;
+        // Check if the last element is greater than the second-to-last element
+        if(arr[n - 1] > arr[n - 2]){
+            return n - 1;  // Return the index of the last element as it's a peak
+        }
+
+        // Check if the first element is greater than the second element
+        if(arr[0] > arr[1]){
+            return 0;    // Return 0 as the first element is considered a peak
+        }
+
+        int start = 1;     // Initialize the start index for binary search
+        int end = n - 2;   // Initialize the end index for binary search
+
+        // Binary search loop
+        while(start <= end){  
+            int mid = start + (end - start) / 2;   // Calculate the middle index
+
+            // Check if arr[mid] is a peak
+            if(arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]){
+                return mid;    // Return the index of the peak element
+            }
+            else if(arr[mid] > arr[mid - 1]){  // Check if arr[mid] is greater than its left neighbor
+                start = mid + 1;    // Update start index to search on the right side
             }
             else{
-                // Otherwise, the peak element must be on the left side of mid or can be the mid element itself
-                // Since we are looking for any peak element, updating end to mid is valid.
-                end = mid;
+                end = mid - 1;   // Update end index to search on the left side
             }
         }
 
-        // At this point, start and end will be equal, indicating the index of the peak element
-        return start;
+        return -1;  // Return -1 if no peak element is found
     }
 
+    
+
     public static void main(String[] args){
-        int[] arr ={0,10,5,2};
+        int[] arr ={1,2,1,3,5,6,4};
         System.out.println(findPeak(arr));
     }
 }
