@@ -1,4 +1,6 @@
 
+// Question: find Nth root of M
+
 
 public class Solution{
 
