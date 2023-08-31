@@ -62,7 +62,7 @@ public class Solution{
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4,5};
+        int[] arr = {10, 20, 30, 40};
         System.out.println(splitArray(arr, 2));
     }
 }
