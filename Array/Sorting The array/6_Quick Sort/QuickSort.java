@@ -70,7 +70,12 @@ public class QuickSort{
 
     public static void main(String[] args) {
         int[] arr = {4, 6, 5, 3, 2, 11, 7};
+        System.out.println("Original Array:");
+        System.out.println(Arrays.toString(arr));
         quickSort(arr, 0, arr.length - 1);
+        System.out.println("After sorting the array using Quick sort");
         System.out.println(Arrays.toString(arr));
     }
 }
+
+
