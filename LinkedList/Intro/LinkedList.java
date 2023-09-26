@@ -355,7 +355,7 @@ public class LinkedList{
         }
 
         // Return the middle node
-        return slow;
+        return slow.next;
     }
 
     // Method to check if the linked list is a palindrome
@@ -457,10 +457,14 @@ public class LinkedList{
         // System.out.println(ll.removeNthFromLast(1));
         // ll.printList();
 
-        ll.addLast(1);
+        // ll.addLast(1);
         // ll.addLast(2);
         // ll.addLast(2);
         // ll.addLast(1);
+
+        ll.addLast(1);
+        ll.addLast(2);
+
 
         ll.printList();
         System.out.println(ll.checkPalindrome());
