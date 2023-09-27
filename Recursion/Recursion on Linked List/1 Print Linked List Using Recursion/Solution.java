@@ -37,6 +37,7 @@ class LinkedListLL{
         printLinkedListRec(temp.next);
     }
     
+    
 }
 
 public class Solution{
@@ -50,6 +51,6 @@ public class Solution{
         ll.addLast(4);
         ll.addLast(5);
 
-        ll.printLinkedListRec(ll.head);
+        
     }
 }
