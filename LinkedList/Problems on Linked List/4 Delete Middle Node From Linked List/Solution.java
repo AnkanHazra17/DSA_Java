@@ -45,15 +45,17 @@ class LinkedListLL {
         // Initialize two pointers, 'slow' and 'fast,' both starting at the head of the list
         Node slow = head;
         Node fast = head;
+        Node prev = null;  // Pointer prev --> set null
 
         // Traverse the list with 'fast' moving two steps at a time and 'slow' moving one step at a time
         while(fast != null && fast.next != null){
+            prev = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
 
         // 'slow' now points to the middle node, so return it
-        return slow;
+        return prev;
     }
 
     // Function to delete the middle node of a singly linked list
@@ -66,16 +68,9 @@ class LinkedListLL {
 
         // Find the middle node using the 'findMiddle' function
         Node midNode = findMiddle(head);
-        // Initialize a temporary pointer 'temp' to traverse the list
-        Node temp = head;
-
-        // Traverse the list until 'temp' reaches the node before the middle node
-        while(temp.next != midNode){
-            temp = temp.next;
-        }
-
-        // Update the 'next' pointer of the previous node to skip the middle node, effectively deleting it
-        temp.next = temp.next.next;
+        
+        midNode.next = midNode.next.next;
+        
         // Return the head of the modified list
         return head;
     }
@@ -87,12 +82,12 @@ public class Solution{
         LinkedListLL ll = new LinkedListLL();
 
         ll.addLast(1);
-        // ll.addLast(3);
-        // ll.addLast(4);
-        // ll.addLast(7);
-        // ll.addLast(1);
-        // ll.addLast(2);
-        // ll.addLast(6);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(7);
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(6);
 
         ll.printList();
         ll.deleteMiddle(ll.head);
