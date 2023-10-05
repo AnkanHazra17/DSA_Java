@@ -33,6 +33,18 @@ public class LinkedlistSort{
         head = newNode;  // Update the head to the new node
     }
 
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+
+        tail.next = newNode;
+        tail = newNode;
+    }
+
     // Method to print the elements of the linked list
     public void printList(){
         Node temp = head;  // Store head to the temp
@@ -124,14 +136,17 @@ public class LinkedlistSort{
     public static void main(String[] args) {
         LinkedlistSort ll = new LinkedlistSort();
 
-        ll.addFirst(4);
-        ll.addFirst(6);
-        ll.addFirst(2);
-        ll.addFirst(9);
-        ll.addFirst(1);
+        // ll.addLast(4);
+        // ll.addLast(2);
+        // ll.addLast(1);
+        // ll.addLast(3);
 
+        ll.addFirst(3);
+        ll.addFirst(1);
+        ll.addFirst(2);
+        ll.addFirst(4);
         ll.printList();
-        head = merrgeSort(head);
+        ll.merrgeSort(head);
         ll.printList();
     }
 }
