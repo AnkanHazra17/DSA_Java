@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 class TreeNode {
     int data;
@@ -28,7 +29,7 @@ public class BinaryTreeTraversal {
         inOrderTraversal(curr.right);
     }
 
-    // Preorder traversal
+    // Recursive Preorder traversal
     static void preOrderTraversal(TreeNode curr) {
         if (curr == null) {
             return;
@@ -37,6 +38,46 @@ public class BinaryTreeTraversal {
         System.out.print(curr.data + " ");
         preOrderTraversal(curr.left);
         preOrderTraversal(curr.right);
+    }
+
+    // Itrative preorderTraversal
+    static List<Integer> itrativePreorder(TreeNode root) {
+
+        // Create a list to store the result of iterative preorder traversal
+        List<Integer> list = new ArrayList<>();
+
+        // Create a stack to simulate the recursive call stack
+        Stack<TreeNode> st = new Stack<>();
+
+        // Check if the root is null, and if so, return an empty list
+        if (root == null) {
+            return null;
+        }
+
+        // Push the root node onto the stack to start the traversal
+        st.push(root);
+
+        // Continue traversal until the stack is empty (all nodes are processed)
+        while (!st.isEmpty()) {
+
+            // Pop the top node from the stack and add its value to the result list
+            root = st.pop();
+            list.add(root.data);
+
+            // Push the right child onto the stack if it exists (preorder: root, left,
+            // right)
+            if (root.right != null) {
+                st.push(root.right);
+            }
+
+            // Push the left child onto the stack if it exists (preorder: root, left, right)
+            if (root.left != null) {
+                st.push(root.left);
+            }
+        }
+
+        // Return the final result of iterative preorder traversal
+        return list;
     }
 
     // Post order traversal
@@ -118,6 +159,8 @@ public class BinaryTreeTraversal {
 
         // postOrderTraversal(root);
 
-        System.out.println(levelOrder(root));
+        // System.out.println(levelOrder(root));
+
+        System.out.println(itrativePreorder(root));
     }
 }
