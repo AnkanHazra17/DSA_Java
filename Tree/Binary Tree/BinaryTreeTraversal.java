@@ -52,34 +52,52 @@ public class BinaryTreeTraversal {
 
     // Level Order Traversal(BFS)
     public static List<List<Integer>> levelOrder(TreeNode root) {
+
+        // Create a queue to perform level order traversal
         Queue<TreeNode> queue = new LinkedList<>();
+
+        // Create a list to store the result of level order traversal
         List<List<Integer>> list = new ArrayList<>();
 
+        // Check if the root is null, and if so, return an empty list
         if (root == null) {
             return list;
         }
 
+        // Enqueue the root node to start the traversal
         queue.offer(root);
 
+        // Continue traversal until the queue is empty (all levels are processed)
         while (!queue.isEmpty()) {
+
+            // Get the number of nodes at the current level
             int levelSize = queue.size();
+
+            // Create a list to store values at the current level
             List<Integer> subList = new ArrayList<>();
 
+            // Process all nodes at the current level
             for (int i = 0; i < levelSize; i++) {
+
+                // Enqueue left child if it exists
                 if (queue.peek().left != null) {
                     queue.offer(queue.peek().left);
                 }
 
+                // Enqueue right child if it exists
                 if (queue.peek().right != null) {
                     queue.offer(queue.peek().right);
                 }
 
+                // Add the value of the current node to the sublist and dequeue it
                 subList.add(queue.poll().data);
             }
 
+            // Add the sublist (values at the current level) to the result list
             list.add(subList);
         }
 
+        // Return the final result of level order traversal
         return list;
     }
 
