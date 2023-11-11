@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 class TreeNode {
     int data;
@@ -46,6 +50,39 @@ public class BinaryTreeTraversal {
         System.out.print(curr.data + " ");
     }
 
+    // Level Order Traversal(BFS)
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+
+        if (root == null) {
+            return list;
+        }
+
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> subList = new ArrayList<>();
+
+            for (int i = 0; i < levelSize; i++) {
+                if (queue.peek().left != null) {
+                    queue.offer(queue.peek().left);
+                }
+
+                if (queue.peek().right != null) {
+                    queue.offer(queue.peek().right);
+                }
+
+                subList.add(queue.poll().data);
+            }
+
+            list.add(subList);
+        }
+
+        return list;
+    }
+
     public static void main(String[] args) {
         // List<Integer> preorder = new ArrayList<>();
         TreeNode root = new TreeNode(1);
@@ -55,12 +92,14 @@ public class BinaryTreeTraversal {
         root.left.right = new TreeNode(5);
         root.right.right = new TreeNode(6);
 
-        inOrderTraversal(root);
-        System.out.println();
+        // inOrderTraversal(root);
+        // System.out.println();
 
-        preOrderTraversal(root);
-        System.out.println();
+        // preOrderTraversal(root);
+        // System.out.println();
 
-        postOrderTraversal(root);
+        // postOrderTraversal(root);
+
+        System.out.println(levelOrder(root));
     }
 }
