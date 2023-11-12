@@ -18,7 +18,7 @@ class TreeNode {
 
 public class BinaryTreeTraversal {
 
-    // Inorder traversal
+    // Recursive Inorder traversal
     static void inOrderTraversal(TreeNode curr) {
         if (curr == null) {
             return;
@@ -27,6 +27,45 @@ public class BinaryTreeTraversal {
         inOrderTraversal(curr.left);
         System.out.print(curr.data + " ");
         inOrderTraversal(curr.right);
+    }
+
+    // Itrative Inorder Traversal
+    static List<Integer> itartiveInorder(TreeNode root) {
+
+        // Create a stack to store tree nodes.
+        Stack<TreeNode> st = new Stack<>();
+
+        // Create a List to store the inorder traversal result.
+        List<Integer> inorder = new ArrayList<>();
+
+        // Start from the root of the tree.
+        TreeNode node = root;
+
+        // Infinite loop to traverse the tree until all nodes are processed.
+        while (true) {
+
+            // If the current node is not null, push it onto the stack and move to its left
+            // child.
+            if (node != null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                // If the current node is null, check if the stack is empty.
+                // If the stack is empty, break out of the loop as traversal is complete.
+                if (st.isEmpty()) {
+                    break;
+                }
+                // If the stack is not empty, pop a node from the stack, add its value to the
+                // inorder list,
+                // and move to its right child.
+                node = st.pop();
+                inorder.add(node.data);
+                node = node.right;
+            }
+        }
+
+        // Return the List containing the inorder traversal result.
+        return inorder;
     }
 
     // Recursive Preorder traversal
@@ -161,6 +200,8 @@ public class BinaryTreeTraversal {
 
         // System.out.println(levelOrder(root));
 
-        System.out.println(itrativePreorder(root));
+        // System.out.println(itrativePreorder(root));
+
+        System.out.println(itartiveInorder(root));
     }
 }
