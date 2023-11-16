@@ -173,6 +173,56 @@ public class BinaryTreeTraversal {
         return postorder;
     }
 
+    // Itrative Post Order Traversal --> using 1 stack
+    static List<Integer> itraPostorder1Stack(TreeNode root) {
+
+        // List to store the result of postorder traversal
+        List<Integer> postorder = new ArrayList<>();
+
+        // Stack to simulate recursion and store nodes
+        Stack<TreeNode> st = new Stack<>();
+
+        // Check if the tree is empty
+        if (root == null) {
+            return postorder; // Return an empty list if the tree is empty
+        }
+
+        // Initialize current node to the root of the tree
+        TreeNode curr = root;
+
+        // Continue traversal until current node is null and stack is empty
+        while (curr != null || !st.isEmpty()) {
+
+            // If current node is not null, push it onto the stack and move to its left
+            // child
+            if (curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            } else {
+
+                // If current node is null, process its right child and pop nodes
+                TreeNode temp = st.peek().right;
+
+                // If right child is null, process the node and its right subtree
+                if (temp == null) {
+                    temp = st.pop();
+                    postorder.add(temp.data);
+
+                    // Keep popping from the stack until a node with a right child is found
+                    while (!st.isEmpty() && temp == st.peek().right) {
+                        temp = st.pop();
+                        postorder.add(temp.data);
+                    }
+                } else {
+                    // If right child is not null, move to the right child
+                    curr = temp;
+                }
+            }
+        }
+
+        return postorder;
+    }
+
     // Level Order Traversal(BFS)
     public static List<List<Integer>> levelOrder(TreeNode root) {
 
@@ -247,6 +297,7 @@ public class BinaryTreeTraversal {
 
         // System.out.println(itartiveInorder(root));
 
-        System.out.println(itraPostorder2Stack(root));
+        // System.out.println(itraPostorder2Stack(root));
+        System.out.println(itraPostorder1Stack(root));
     }
 }
