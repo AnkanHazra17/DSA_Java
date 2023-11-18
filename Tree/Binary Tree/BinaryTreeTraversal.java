@@ -16,6 +16,16 @@ class TreeNode {
     }
 }
 
+class Pair {
+    int num;
+    TreeNode node;
+
+    Pair(TreeNode node, int num) {
+        this.node = node;
+        this.num = num;
+    }
+}
+
 public class BinaryTreeTraversal {
 
     // Recursive Inorder traversal
@@ -274,6 +284,87 @@ public class BinaryTreeTraversal {
         return list;
     }
 
+    // Preorder inorder and postorder in one traversal
+    static List<List<Integer>> preInPost(TreeNode root) {
+        // Create a stack to perform iterative tree traversal using the Pair class to
+        // store both the TreeNode and a number indicating the stage of traversal.
+        Stack<Pair> st = new Stack<>();
+
+        // Create lists to store the nodes visited during pre-order, in-order, and
+        // post-order traversals.
+        List<Integer> pre = new ArrayList<>();
+        List<Integer> in = new ArrayList<>();
+        List<Integer> post = new ArrayList<>();
+
+        // Create a list to store the three traversal lists.
+        List<List<Integer>> list = new ArrayList<>();
+
+        // Check if the root is null. If so, return the empty list.
+        if (root == null) {
+            return list;
+        }
+
+        // Push the root node onto the stack with 'num' set to 1 to indicate the start
+        // of traversal.
+        st.push(new Pair(root, 1));
+
+        // Start iterative traversal using the stack.
+        while (!st.isEmpty()) {
+
+            // Pop the top element from the stack.
+            Pair p = st.pop();
+
+            // Check the stage of traversal using 'num'.
+            if (p.num == 1) {
+
+                // If 'num' is 1, it means it's the first time visiting the node in pre-order
+                // traversal.
+                // Add the node's data to the pre-order list and update 'num' to 2.
+                pre.add(p.node.data);
+                p.num++;
+
+                // Push the updated Pair back onto the stack to resume traversal after visiting
+                // the left child.
+                st.push(p);
+
+                // If the left child exists, push it onto the stack with 'num' set to 1.
+                if (p.node.left != null) {
+                    st.push(new Pair(p.node.left, 1));
+                }
+            } else if (p.num == 2) {
+
+                // If 'num' is 2, it means it's the second time visiting the node in in-order
+                // traversal.
+                // Add the node's data to the in-order list and update 'num' to 3.
+                in.add(p.node.data);
+                p.num++;
+
+                // Push the updated Pair back onto the stack to resume traversal after visiting
+                // the right child.
+                st.push(p);
+
+                // If the right child exists, push it onto the stack with 'num' set to 1.
+                if (p.node.right != null) {
+                    st.push(new Pair(p.node.right, 1));
+                }
+            } else {
+                // If 'num' is 3, it means it's the third time visiting the node in post-order
+                // traversal.
+                // Add the node's data to the post-order list.
+                post.add(p.node.data);
+            }
+        }
+
+        // Add the three traversal lists to the final result list.
+        list.add(pre);
+        list.add(in);
+        list.add(post);
+
+        // Return the list containing pre-order, in-order, and post-order traversal
+        // lists.
+        return list;
+    }
+
     public static void main(String[] args) {
         // List<Integer> preorder = new ArrayList<>();
         TreeNode root = new TreeNode(1);
@@ -298,6 +389,8 @@ public class BinaryTreeTraversal {
         // System.out.println(itartiveInorder(root));
 
         // System.out.println(itraPostorder2Stack(root));
-        System.out.println(itraPostorder1Stack(root));
+        // System.out.println(itraPostorder1Stack(root));
+
+        System.out.println(preInPost(root));
     }
 }
